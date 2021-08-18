@@ -4,4 +4,6 @@ import router from './router'
 import store from './store'
 import './styles/main.css'
 
+import './plugins/axios'
+
 createApp(App).use(store).use(router).mount('#app')

@@ -1,14 +1,14 @@
 <template>
     <div v-if="user">
         <TopMenu/>
-       <div class="w-3/5 mx-auto">
-            <router-link to="/profile" class="text-blue-500 flex flex-row">
+       <div class="w-full md:w-3/5 mx-auto">
+            <router-link to="/profile" class="text-blue-500 flex flex-row ml-5 md:ml-0">
                 <span class="material-icons">navigate_before</span>
                 <p>Back</p>
             </router-link>
 
-            <div class="w-full rounded-lg border border-gray-300 p-10 mt-5 bg-white">
-                <div class="w-1/2">
+            <div class="w-full rounded-lg md:border border-gray-300 p-10 mt-5 bg-white">
+                <div class="w-full md:w-1/2">
                     <h1 class="text-lg font-semibold">Change Info</h1>
                     <p class="text-gray-500 text-sm">Changes will be reflected to every services</p>
                     <div class="mt-5 w-1/2">
@@ -35,6 +35,7 @@
                             <div class="text-sm mb-5">
                                 <p class="font-semibold">Email</p>
                                 <input type="email" class="border border-gray-400 w-full p-3 rounded-lg focus:border-0" v-model="email" readonly>
+                            
                             </div>
                             <div class="text-sm mb-5" v-if="!useProvider">
                                 <p class="font-semibold">Password</p>
@@ -47,14 +48,18 @@
                     </div>
                 </div>
             </div>
+            <Footer/>
        </div>
     </div>
 </template>
 <script>
 import TopMenu from '../components/TopMenu.vue'
+import Footer from '../components/Footer.vue'
+
 export default {
     components: {
-        TopMenu
+        TopMenu,
+        Footer
     },
     data() {
         return {

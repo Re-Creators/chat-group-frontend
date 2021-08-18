@@ -2,66 +2,98 @@ import { createStore } from 'vuex'
 import axios from 'axios'
 import router from '../router/index'
 
+axios.defaults.baseURL = 'http://authentication-app.test/api'
+
 
 export default createStore({
   state: {
     user : null,
+    token : localStorage.getItem('token'),
     useProvider : false,
   },
   mutations: {
     setToken(state, token) {
+      state.token = token
       localStorage.setItem('token', token)
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`
+      
     },
-    clearUserData(state) {
+    logout(state) {
       localStorage.removeItem('token')
+      state.token = null
+      state.user = null
       state.useProvider = false
-      location.reload()
     },
     setUserData(state, userData) {
       state.user = userData
     },
     setProvider(state) {
       state.useProvider = true
+    },
+    getUserFailure(state) {
+      state.user = null
+      state.token = null
+
+      localStorage.removeItem('token')
     }
   },
   actions: {
     login({commit}, credentials) {
-      return axios.post('http://authentication-app.test/api/login', credentials)
+      return axios.post('/login', credentials)
                   .then(({data}) => {
                     commit('setToken', data.token)
                     router.push({name: 'Profile'})
                   })
     },
+    async getOauthUrl(ctx, provider) {
+      try {
+        const { data } = await axios.get(`/auth/${provider}/redirect`)
+        
+        return data.redirect
+      }catch(e) {
+        console.log(e)
+      }
+
+    },
     async getUserData({commit}) {
-      await axios.get('http://authentication-app.test/api/user')
-      .then(({data}) => {
+      try{
+        const { data } = await axios.get('/user')
         commit('setUserData', data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      }catch (e) {
+        commit('getUserFailure')
+      }
     },
-    logout({commit}) {
-      commit('clearUserData')
+    async logout({commit}) {
+      try{
+        await axios.post('/logout')
+      }catch(e) {
+        commit('logout')
+      }
     },
-    updateUser({state, commit},formData) {
-      axios.post('http://authentication-app.test/api/user/' + state.user.id, formData)
-      .then((data) => {
+    async updateUser({state, commit}, formData) {
+      try {
+        const { data } = await axios.post('/user/' + state.user.id, formData)
         commit('setUserData', data)
         router.push({name: 'Profile'})
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      }catch (e) {
+        console.log(e)
+      }
     },
-    registerUser({commit}, userData) {
-      return axios.post('http://authentication-app.test/api/register', userData)
-      .then(({data}) => {
+    async registerUser({commit}, userData) {
+      try{
+        const { data } = await axios.post('/register', userData)
+
         commit('setToken', data.token)
-        router.push({name: 'Profile'})
-      })
+        router.push({name : 'Profile'})
+      }catch(e) {
+        if(e.response) {
+          return e.response.data.errors
+        }
+      }
     }
+  },
+  getters: {
+    authCheck: state => state.token !== null,
+    token : state => state.token
   },
   modules: {
   }
