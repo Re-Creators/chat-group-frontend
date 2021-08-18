@@ -32,7 +32,6 @@ export default {
     },
     methods: {
         async OauthLogin(provider) {
-            console.log('oauth')
             const newWindow = openWindow('', 'message')
             const url = await this.$store.dispatch('getOauthUrl', provider)
 
@@ -41,7 +40,7 @@ export default {
             }
         },
         onMessage (e) {
-            if (e.origin !== "http://authentication-app.test/" && !e.data.token) {
+            if (e.origin !== process.env.VUE_APP_API && !e.data.token) {
                 return
             }
 
