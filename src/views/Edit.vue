@@ -69,7 +69,7 @@ export default {
             password : "",
             email : "",
             id : null,
-            image : null
+            image : null,
         }
     },
     mounted() {
@@ -101,6 +101,7 @@ export default {
             if(this.image !== null) {
                 form.append('avatar', this.image)
             }
+            
 
             form.append('name', this.name)
             form.append('bio', this.bio)
