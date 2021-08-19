@@ -12,7 +12,8 @@ module.exports = {
         
        },
        backgroundColor: theme => ({
-         'active' :'rgba(242, 242, 242, 1)'
+         'active' :'rgba(242, 242, 242, 1)',
+         'overlay' : 'rgba(0, 0, 0, 0.5)'
        })
     }
   },

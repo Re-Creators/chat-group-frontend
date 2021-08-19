@@ -1,10 +1,26 @@
 <template>
-    <router-view/>
+    <div>
+      <router-view v-if="!isLoading"/>
+      <Loading v-if="user === null || isLoading"/>
+    </div>
+  
 </template>
+
 <script>
+import Loading from './components/Loading.vue'
 
 export default {
-  
+  components: {
+    Loading
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
+    },
+    isLoading() {
+      return this.$store.state.isLoading
+    }
+  }
 }
 </script>
 

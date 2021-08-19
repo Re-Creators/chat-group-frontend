@@ -10,6 +10,7 @@ export default createStore({
     user : null,
     token : localStorage.getItem('token'),
     useProvider : false,
+    isLoading : false
   },
   mutations: {
     setToken(state, token) {
@@ -34,6 +35,9 @@ export default createStore({
       state.token = null
 
       localStorage.removeItem('token')
+    },
+    setLoading(state, payload) {
+      state.isLoading = payload
     }
   },
   actions: {
@@ -58,6 +62,7 @@ export default createStore({
       try{
         const { data } = await axios.get('/user')
         commit('setUserData', data)
+
       }catch (e) {
         commit('getUserFailure')
       }
@@ -70,9 +75,11 @@ export default createStore({
       }
     },
     async updateUser({state, commit}, formData) {
+      commit('setLoading', true)
       try {
         const { data } = await axios.post('/user/' + state.user.id, formData)
         commit('setUserData', data)
+        commit('setLoading', false)
         router.push({name: 'Profile'})
       }catch (e) {
         console.log(e)
