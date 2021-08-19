@@ -1,7 +1,7 @@
 <template>
     <div>
       <router-view v-if="!isLoading"/>
-      <Loading v-if="user === null || isLoading"/>
+      <Loading v-if="isLoading"/>
     </div>
   
 </template>
