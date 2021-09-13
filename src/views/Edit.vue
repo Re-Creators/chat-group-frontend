@@ -1,7 +1,6 @@
 <template>
     <div v-if="user">
         <!-- Loadeer -->
-
         <TopMenu/>
        <div class="w-full md:w-3/5 mx-auto relative">
             <router-link to="/profile" class="text-blue-500 flex flex-row ml-5 md:ml-0">

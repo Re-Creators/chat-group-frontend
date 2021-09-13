@@ -3,7 +3,7 @@ import axios from 'axios'
 
 Pusher.logToConsole = true
 
-const pusher = new Pusher('cc08146127e6a02c13a3', {
+const pusher = new Pusher('ac3886ed9240d2d46a94', {
     cluster: 'mt1',
     forceTLS : true,
     authorizer: (channel) => {
@@ -23,7 +23,5 @@ const pusher = new Pusher('cc08146127e6a02c13a3', {
         }
     }
 })
-
-
 
 export default pusher

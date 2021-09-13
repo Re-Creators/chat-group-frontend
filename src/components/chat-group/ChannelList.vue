@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full w-full flex flex-col justify-between relative">
+    <div class="h-full w-full flex flex-col relative">
         <section class="pl-6 pr-4">
             <div class="w-full py-4 text-white flex flex-row justify-between items-center shadow-md0">
                 <h1 class="font-semibold">Channels</h1>
@@ -62,7 +62,7 @@ export default {
 
        async function chooseChannel(channel) {
 
-            store.commit('setMobileMenu', "hidden")
+            store.commit('setMobileMenu', false)
             store.commit('setActiveChannel', channel)
 
             if(channel === null) {

@@ -1,10 +1,10 @@
 <template>
-    <div class="relative w-full md:w-3/4">
+    <div class="w-full md:w-3/4 overflow-hidden">
         <Welcome v-if="activeChannel === null"/>
         
-        <div class="container h-screen" v-if="activeChannel !== null">
+        <div class="container relative h-screen" v-if="activeChannel !== null">
             <div class="w-full flex flex-row shadow-lg pl-5 md:pl-10 py-3 text-white uppercase">
-                <button class="mr-3 md:hidden"><span class="material-icons" @click="$store.commit('setMobileMenu', false)">menu</span></button>
+                <button class="mr-3 md:hidden"><span class="material-icons" @click="$store.commit('setMobileMenu', true)">menu</span></button>
                 {{ activeChannel.name }}
             </div>
             <!-- Message Container -->
@@ -12,7 +12,7 @@
                 <!-- Message -->
                 <MessageGroup/>
             </div>
-            <div class="w-full px-10 py-5 absolute bottom-0 bg-primary">
+            <div class="w-full px-10 py-5 fixed md:absolute bottom-0 bg-primary">
                 <div class="relative">
                     <input type="text" class="w-full p-3 bg-input rounded-md text-sm outline-none text-white" placeholder="Type message here" v-model="messageText" @keyup.enter="sendMessage">
                     <button class="absolute right-2 mt-2"><span class="material-icons text-sm text-white bg-blue-600 px-2 py-1 rounded-lg" @click="sendMessage">send</span></button>

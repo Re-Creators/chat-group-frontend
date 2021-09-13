@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 import axios from 'axios'
 import router from '../router/index'
 
-axios.defaults.baseURL ='http://chat-group.test/api'
+axios.defaults.baseURL ='https://chat-group-backend.herokuapp.com/api'
 
 
 export default createStore({
@@ -129,7 +129,7 @@ export default createStore({
     },
     async getChannels({commit}) {
         try{
-            const { data } = await axios.get('http://chat-group.test/api/chat/channels')
+            const { data } = await axios.get('/chat/channels')
 
             commit('setChannels', data)
         }catch(err){

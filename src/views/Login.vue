@@ -1,5 +1,5 @@
 <template>
-    <div class="md:min-h-screen flex md:justify-center">
+    <div class="md:min-h-screen flex md:justify-center py-10 md:py-0">
         <div class="w-full md:w-1/2 lg:w-1/3 px-5 py-5 md:m-auto">
             <div class="rounded-lg md:border md:border-gray-500 md:px-10 md:py-10">
                 <section>

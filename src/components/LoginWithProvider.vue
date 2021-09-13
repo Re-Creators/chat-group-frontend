@@ -15,7 +15,7 @@
                 <img src="@/assets/Github.svg" alt="">
             </button>
         </div>
-        <p class="text-sm text-gray-500">{{ caption }} <router-link to="/register" class="text-blue-500">{{ type }}</router-link></p>
+        <p class="text-sm text-gray-500">{{ caption }} <router-link :to="redirectTo(type)" class="text-blue-500 capitalize">{{ type }}</router-link></p>
     </section>
 </template>
 <script>
@@ -47,6 +47,12 @@ export default {
             this.$store.commit('setToken', e.data.token)
             this.$store.commit('setProvider')
             this.$router.push({ name: 'Profile' })
+        },
+        redirectTo(type) {
+            if(type === "login"){
+                return "/"
+            }
+            return "/register"
         }
     },
 }

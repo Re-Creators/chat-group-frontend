@@ -41,7 +41,7 @@ export default {
 
         async function getMembers() {
             try{
-                const { data } = await axios.get('http://chat-group.test/api/chat/' + channel.value.id + '/members')
+                const { data } = await axios.get('/chat/' + channel.value.id + '/members')
 
                 members.value = data
             }catch(err){

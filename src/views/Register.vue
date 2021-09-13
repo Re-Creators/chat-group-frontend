@@ -1,8 +1,8 @@
 <template>
-    <div class="md:min-h-screen flex justify-center">
+    <div class="h-screen md:min-h-screen flex justify-center relative py-10">
         <div class="md:w-1/2 lg:w-1/3 px-5 md:m-auto">
             <div class="md:px-10 md:py-10 rounded-lg md:border md:border-gray-500 ">
-                <section>
+                <section class="text-white">
                     <img src="@/assets/devchallenges.svg" alt="">
                     <div class="text-left pr-8 mt-5 md:mt-3">
                         <p class="font-semibold">Join thousands of learners from around the world </p>
@@ -24,7 +24,7 @@
                         <button type="submit" class="w-full p-3 bg-blue-500 text-white text-sm mt-5 rounded-lg hover:bg-blue-600 active:bg-blue-700">Start coding now</button>
                     </form>
                 </section>
-               <LoginWithProvider caption="Adready a member?" type="Login" />
+               <LoginWithProvider caption="Adready a member?" type="login" />
             </div>
             <Footer/>
         </div>
