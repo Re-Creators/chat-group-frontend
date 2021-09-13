@@ -2,12 +2,12 @@
     <div v-if="user">
         <TopMenu/>
        <div class="w-full md:w-3/5 mx-auto">
-            <section class="text-center md:text-base">
+            <section class="text-center md:text-base text-white">
                 <p class="font-semibold text-lg md:text-3xl">Personal Info</p>
                 <p class="text-xs md:text-base">Basic info, like your name and photo</p>
             </section>
 
-            <section class="w-full md:border border-gray-400 mt-10 md:px-0 py-3 grid grid-rows-7 divide-y divide-gray-400 rounded-lg text-sm bg-white">
+            <section class="w-full md:border border-gray-400 mt-10 md:px-0 py-3 grid grid-rows-7 divide-y divide-gray-400 rounded-lg text-sm  text-white">
                 <div class="flex flex-row justify-between w-full py-5 px-5 md:px-14">
                     <div class="w-4/5">
                         <h1 class="font-semibold text-xl">Profile</h1>

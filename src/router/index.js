@@ -27,7 +27,15 @@ const routes = [
       requiresAuth : true
     },
     component: () => import(/* webpackChunkName: "edit" */ '../views/Edit.vue')
-  }
+  },
+  {
+    path: '/chat',
+    name: 'Chat Group',
+    meta : {
+      requiresAuth : true
+    },
+    component: () => import(/* webpackChunkName: "edit" */ '../views/ChatGroup.vue')
+  },
 ]
 
 const router = createRouter({

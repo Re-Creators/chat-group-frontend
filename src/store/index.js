@@ -2,15 +2,20 @@ import { createStore } from 'vuex'
 import axios from 'axios'
 import router from '../router/index'
 
-axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT
+axios.defaults.baseURL ='http://chat-group.test/api'
 
 
 export default createStore({
   state: {
     user : null,
+    sidebarState : 1,
+    activeChannel : null,
+    channels: [],
     token : localStorage.getItem('token'),
+    mobileMenu: false,
     useProvider : false,
-    isLoading : false
+    isLoading : false,
+    messages : []
   },
   mutations: {
     setToken(state, token) {
@@ -23,6 +28,12 @@ export default createStore({
       state.token = null
       state.user = null
       state.useProvider = false
+    },
+    setMobileMenu(state, value) {
+      state.mobileMenu = value
+    },
+    setSidebarState(state, value) {
+      state.sidebarState = value
     },
     setUserData(state, userData) {
       state.user = userData
@@ -38,6 +49,15 @@ export default createStore({
     },
     setLoading(state, payload) {
       state.isLoading = payload
+    },
+    setChannels(state, channels) {
+      state.channels = channels
+    },
+    setActiveChannel(state, channel) {
+      state.activeChannel = channel
+    },
+    setMessages(state, messages) {
+      state.messages = messages
     }
   },
   actions: {
@@ -96,7 +116,26 @@ export default createStore({
           return e.response.data.errors
         }
       }
-    }
+    },
+    
+    async getMessages({commit}, channelId){
+      try{
+        const { data } = await axios.get('/chat/' + channelId + '/messages')
+
+        commit('setMessages', data)
+      }catch(err) {
+        console.log(err)
+      }
+    },
+    async getChannels({commit}) {
+        try{
+            const { data } = await axios.get('http://chat-group.test/api/chat/channels')
+
+            commit('setChannels', data)
+        }catch(err){
+            console.log(err)
+        }
+    } 
   },
   getters: {
     authCheck: state => state.token !== null,
